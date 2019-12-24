@@ -18,7 +18,7 @@ class JsonRpcDispatcher extends Dispatcher {
      */
     public function callActionMethod($handler, $actionMethod, array $params = null) {
 
-        return call_user_func_array([$handler, $actionMethod], array_merge($params, $this->_options));
+        return \call_user_func_array([$handler, $actionMethod], array_merge($params, $this->_options));
 
     }
 

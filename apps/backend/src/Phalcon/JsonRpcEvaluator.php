@@ -19,6 +19,7 @@ class JsonRpcEvaluator extends Injectable implements Evaluator
      * @throws ArgumentException
      * @throws ApplicationException
      * @throws MethodException
+     * @throws \Datto\JsonRpc\Exceptions\Exception
      */
     public function evaluate($method, $arguments)
     {
