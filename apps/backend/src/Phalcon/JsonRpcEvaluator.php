@@ -8,7 +8,8 @@ use Datto\JsonRpc\Exceptions\ArgumentException;
 use Datto\JsonRpc\Exceptions\MethodException;
 use Phalcon\Di\Injectable;
 
-class JsonRpcEvaluator extends Injectable implements Evaluator {
+class JsonRpcEvaluator extends Injectable implements Evaluator
+{
 
 
     /**
@@ -19,7 +20,8 @@ class JsonRpcEvaluator extends Injectable implements Evaluator {
      * @throws ApplicationException
      * @throws MethodException
      */
-    public function evaluate($method, $arguments) {
+    public function evaluate($method, $arguments)
+    {
 
         [$task, $action] = explode('_', $method);
 
@@ -37,20 +39,27 @@ class JsonRpcEvaluator extends Injectable implements Evaluator {
 
             $this->di->get('application')->handle($arguments);
 
-        }catch (\TypeError $exception){
+        } catch (\TypeError $exception) {
 
             throw new ArgumentException();
 
-        } catch (\Exception $exception){
+        } catch (\Exception $exception) {
 
-            switch($exception->getCode()){
-                case JsonRpcDispatcher::EXCEPTION_CYCLIC_ROUTING:
-                case JsonRpcDispatcher::EXCEPTION_HANDLER_NOT_FOUND:
-                case JsonRpcDispatcher::EXCEPTION_ACTION_NOT_FOUND: throw new MethodException();
-                case JsonRpcDispatcher::EXCEPTION_INVALID_PARAMS: throw new ArgumentException();
-                default: throw new ApplicationException($exception->getMessage(), $exception->getCode());
+            if (!($exception instanceof \Datto\JsonRpc\Exceptions\Exception)) {
+
+                switch ($exception->getCode()) {
+                    case JsonRpcDispatcher::EXCEPTION_CYCLIC_ROUTING:
+                    case JsonRpcDispatcher::EXCEPTION_HANDLER_NOT_FOUND:
+                    case JsonRpcDispatcher::EXCEPTION_ACTION_NOT_FOUND:
+                        throw new MethodException();
+                    case JsonRpcDispatcher::EXCEPTION_INVALID_PARAMS:
+                        throw new ArgumentException();
+                    default:
+                        throw new ApplicationException($exception->getMessage(), $exception->getCode());
+                }
             }
 
+            throw $exception;
         }
 
         return $dispatcher->getReturnedValue();

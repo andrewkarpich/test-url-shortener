@@ -1,13 +1,10 @@
 <?php
 
-use Backend\Phalcon\JsonRpcDispatcher;
 use Phalcon\Crypt;
 use Phalcon\Db\Adapter\Pdo\Postgresql;
 use Phalcon\Mvc\Url;
 
 $container->set('config', $config);
-
-$container->set('dispatcher', new JsonRpcDispatcher());
 
 $container->set('url', function () use ($config) {
     $url = new Url();

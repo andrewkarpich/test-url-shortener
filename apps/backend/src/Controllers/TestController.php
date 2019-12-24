@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: andrewkarpich
- * Date: 24/12/2019
- * Time: 00:52
- */
 
 namespace Backend\Controllers;
 
