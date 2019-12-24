@@ -101,19 +101,17 @@
 
             event.preventDefault();
 
-            var asd = jrpc.call('url_reduce', [$('input[type="url"]').val()])
+            jrpc.call('url_reduce', [$('input[type="url"]').val()])
                 .then(function (data) {
                     isShowStatusBlock(true);
                     $statusSuccessBlockUrl.text(location.href + data);
                 })
                 .catch(function (data) {
                     console.error(data);
-                    if(data.code === -32602){
+                    if (data.code === -32602) {
                         $statusBlockErrorText.text('Неверный URL!');
                     }
                 })
-
-            console.log(asd);
 
         });
 

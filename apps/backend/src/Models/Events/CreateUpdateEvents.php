@@ -5,24 +5,27 @@ namespace Backend\Models\Events;
 use DateTime;
 use Phalcon\Mvc\Model\MetaDataInterface;
 
-trait CreateUpdateEvents {
+trait CreateUpdateEvents
+{
 
-    protected function _preSave(MetaDataInterface $metaData, $exists, $identityField) {
+    protected function _preSave(MetaDataInterface $metaData, $exists, $identityField)
+    {
 
-        if($exists) $this->updated_at = self::getNowDateTime();
+        if ($exists) $this->updated_at = self::getNowDateTime();
         else $this->created_at = self::getNowDateTime();
 
         return parent::_preSave($metaData, $exists, $identityField);
 
     }
 
-    public static function getNowDateTime() {
+    public static function getNowDateTime()
+    {
 
         try {
 
             $dateTime = @DateTime::createFromFormat('U.u', microtime(true));
 
-            if($dateTime){
+            if ($dateTime) {
 
                 $date = $dateTime->format('Y-m-d H:i:s.u');
 
@@ -31,7 +34,7 @@ trait CreateUpdateEvents {
                 $date = @date('Y-m-d H:i:s');
 
             }
-        } catch(\Exception $e){
+        } catch (\Exception $e) {
 
             $date = @date('Y-m-d H:i:s');
 
