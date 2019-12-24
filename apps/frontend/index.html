@@ -65,21 +65,28 @@
 
         //configure
         var jrpc = new simple_jsonrpc();
-        jrpc.toStream = function (_msg) {
+
+        jrpc.toStream = function (data) {
+
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
-                if (this.readyState != 4) return;
+
+                if (this.readyState !== 4) return;
+
                 try {
+
                     JSON.parse(this.responseText);
                     jrpc.messageHandler(this.responseText);
-                }
-                catch (e) {
+
+                } catch (e) {
                     console.error(e);
                 }
             };
+
             xhr.open("POST", 'http://localhost:8081', true);
             xhr.setRequestHeader('Content-type', 'application/json');
-            xhr.send(_msg);
+
+            xhr.send(data);
         };
 
         var $statusSuccessBlock = $('.status-block');

@@ -26,9 +26,7 @@ class UrlController extends JsonRpcController {
         $validation->add('url', new \Phalcon\Validation\Validator\Url);
 
         if (!$validation->validate(['url' => $longUrl]) || !filter_var($longUrl, FILTER_VALIDATE_URL)) {
-
             throw new ArgumentException();
-
         }
 
         /**
@@ -36,11 +34,7 @@ class UrlController extends JsonRpcController {
          */
         $url = Url::findFirstByUrl($longUrl);
 
-        if ($url) {
-
-            return $url->code;
-
-        }
+        if ($url) return $url->code;
 
         $url = new Url();
 
