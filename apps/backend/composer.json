@@ -1,0 +1,20 @@
+{
+    "name": "test-url-shortener",
+    "description": "test-url-shortener",
+    "minimum-stability": "dev",
+    "type": "project",
+    "require": {
+        "robmorgan/phinx": "^0.10.6",
+        "datto/json-rpc-http": "5.0.3"
+    },
+    "require-dev": {
+        "roave/security-advisories": "dev-master",
+        "phalcon/devtools": "3.4.x",
+        "phalcon/ide-stubs": "v3.4.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Backend\\": "src/"
+        }
+    }
+}

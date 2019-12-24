@@ -1,0 +1,42 @@
+version: '2'
+services:
+  postgres:
+      container_name: t_postgres
+      image: postgres:11.2
+      ports:
+          - 5432:5432
+      volumes:
+          - postgresvolume:/var/lib/postgresql/data
+      environment:
+          - POSTGRES_DB=test
+          - POSTGRES_USER=test
+          - POSTGRES_PASSWORD=TWq6zVfy6WejdJ3THMJS
+  nginx:
+      container_name: t_nginx
+      build:
+          dockerfile: ./Dockerfile
+          args:
+            - ENVIRONMENT=local
+          context: ./containers/nginx
+      ports:
+          - 8080:8080
+      volumes:
+          - ./logs/nginx:/etc/logs/nginx
+      volumes_from:
+          - backend
+      environment:
+          - NGINX_HOST=localhost
+          - NGINX_PORT=80
+      links:
+          - backend
+  backend:
+      container_name: t_backend
+      build:
+          dockerfile: ./Dockerfile
+          context: ./containers/backend
+          args:
+          - ENVIRONMENT=local
+      volumes:
+          - ./apps/backend/:/var/www
+volumes:
+  postgresvolume:
