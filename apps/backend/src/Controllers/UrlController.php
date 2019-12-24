@@ -25,7 +25,7 @@ class UrlController extends JsonRpcController {
 
         $validation->add('url', new \Phalcon\Validation\Validator\Url);
 
-        if (!$validation->validate(['url' => $longUrl]) || !filter_var($longUrl, FILTER_VALIDATE_URL)) {
+        if (!$validation->validate(['url' => $longUrl])) {
             throw new ArgumentException();
         }
 
