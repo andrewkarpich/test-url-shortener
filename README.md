@@ -1,8 +1,6 @@
 
 
-http://localhost:8080/ - frontend
-
-http://localhost:8081/ - backend
+http://localhost:8080/
 
 
 
@@ -27,13 +25,13 @@ Exec in container: `docker exec -it <CONTAINER_ID> bash`
 Create migration (see in `apps/backend/database/migrations`):
 
 `
-docker exec -it bc_backend php vendor/bin/phinx create <NewMigrationName>
+docker exec -it t_backend php vendor/bin/phinx create <NewMigrationName>
 `
 
 Migrate:
 
 `
-docker exec -it bc_backend php vendor/bin/phinx migrate -e default
+docker exec -it t_backend php vendor/bin/phinx migrate -e default
 `
 
 -----------
@@ -41,21 +39,13 @@ docker exec -it bc_backend php vendor/bin/phinx migrate -e default
 **Phalcon dev tools**
 
 `
-docker exec -it bc_backend php vendor/phalcon/devtools/phalcon.php <Commands>
+docker exec -it t_backend php vendor/phalcon/devtools/phalcon.php <Commands>
 `
 
 Example
 
 `
-docker exec -it bc_backend php vendor/phalcon/devtools/phalcon.php info
-`
-
------------
-
-**Php Unit**
-
-`
-docker exec -it bc_backend php vendor/phpunit/phpunit/phpunit <Commands>
+docker exec -it t_backend php vendor/phalcon/devtools/phalcon.php info
 `
 
 -----------
