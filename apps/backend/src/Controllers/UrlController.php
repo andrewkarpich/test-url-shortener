@@ -7,10 +7,12 @@ use Backend\Models\Url;
 use Backend\Phalcon\JsonRpcController;
 use Datto\JsonRpc\Exceptions\ApplicationException;
 use Datto\JsonRpc\Exceptions\ArgumentException;
+use Phalcon\Filter;
 use Phalcon\Security\Exception;
 use Phalcon\Validation;
 
-class UrlController extends JsonRpcController {
+class UrlController extends JsonRpcController
+{
 
     /**
      * @param string $longUrl
@@ -19,7 +21,10 @@ class UrlController extends JsonRpcController {
      * @throws ArgumentException
      * @throws Exception
      */
-    public function reduceAction(string $longUrl): string {
+    public function reduceAction(string $longUrl): string
+    {
+
+        $longUrl = (new Filter)->sanitize($longUrl, ['string', 'trim']);
 
         $validation = new Validation();
 
@@ -60,7 +65,8 @@ class UrlController extends JsonRpcController {
      * @return string
      * @throws ApplicationException
      */
-    protected function generateCode(int $nestedLevel = 1): ?string {
+    protected function generateCode(int $nestedLevel = 1): ?string
+    {
 
         try {
 
@@ -68,7 +74,7 @@ class UrlController extends JsonRpcController {
 
                 $code = mb_substr($this->security->getRandom()->base64Safe(10), -10 - ($nestedLevel - 1), -5);
 
-                if(Url::countByCode($code) > 0){
+                if (Url::countByCode($code) > 0) {
 
                     return $this->generateCode($nestedLevel + 1);
 
