@@ -25,7 +25,7 @@ class UrlController extends JsonRpcController {
 
         $validation->add('url', new \Phalcon\Validation\Validator\Url);
 
-        if (!$validation->validate(['url' => $longUrl])) {
+        if (!$validation->validate(['url' => $longUrl]) || !filter_var($longUrl, FILTER_VALIDATE_URL)) {
             throw new ArgumentException();
         }
 
@@ -49,7 +49,7 @@ class UrlController extends JsonRpcController {
 
         }
 
-        // TODO: LOGGING THIS CASE
+        // TODO: LOG THIS CASE
 
         throw new ApplicationException('Something went wrong!', 1);
 
@@ -66,7 +66,7 @@ class UrlController extends JsonRpcController {
 
             if ($nestedLevel < 5) {
 
-                $code = substr($this->security->getRandom()->base64Safe(10), -10, -5);
+                $code = mb_substr($this->security->getRandom()->base64Safe(10), -10 - ($nestedLevel - 1), -5);
 
                 if(Url::countByCode($code) > 0){
 
@@ -82,12 +82,11 @@ class UrlController extends JsonRpcController {
 
         } catch (Exception $e) {
 
-            // TODO: LOGGING THIS CASE
+            // TODO: LOG THIS CASE
 
             throw new ApplicationException('Something went wrong!', 1);
 
         }
 
     }
-
 }

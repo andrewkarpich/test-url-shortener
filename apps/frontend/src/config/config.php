@@ -11,21 +11,10 @@ $config = new \Phalcon\Config([
 
     'url' => '/',
 
-    'database' => [
-        'postgres' => [
-            'adapter' => 'pgsql',
-            'host' => 'postgres',
-            'dbname' => 'test',
-            'username' => 'test',
-            'password' => 'TWq6zVfy6WejdJ3THMJS',
-            'port' => 5432,
-        ],
-    ],
-
     'secure' => [
         'method' => 'AES-256-CTR',
-        'vector' => 'UbmPw4S3dvk2tb6L3mx3Fp4taUR29CfX',
-        'salt' => '9m3fVMc@857Quf%1?gR#WfC%8Ec%5s&cjPa77N2F!rgK^3B9sHasuLYhuYz-aEZjFPBk',
+        'vector' => 'UbmPw3S3dvk2tb6L3m33Fp4taUR29CfX',
+        'salt' => '9m3fVMc@857Quf%1?gR#Wfv%8Ec%5s&cjPa77N2F!rgK^3B9SHasuLYhnYz-aEZjFPBk',
     ],
 
 ]);

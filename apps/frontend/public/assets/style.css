@@ -1,0 +1,15 @@
+.full-screen {
+    width: calc(100vw - 18px);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.shortener-form {
+    width: 350px;
+}
+
+.status-block {
+    opacity: 0;
+}
