@@ -8,8 +8,6 @@ use Phalcon\Mvc\Model\Behavior\Timestampable;
 
 class Url extends Model {
 
-//    use CreateUpdateEvents;
-
     public function initialize() {
         $this->addBehavior(new Timestampable([
             'beforeValidationOnCreate' => [
