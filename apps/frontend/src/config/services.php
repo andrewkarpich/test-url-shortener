@@ -16,7 +16,7 @@ $container->set('dispatcher', new Dispatcher());
 $container->set('request', new Request());
 $container->set('response', new Response());
 
-$container->set('router', function (){
+$container->set('router', function () {
 
     $router = new Router();
 
@@ -47,16 +47,16 @@ $container->set('crypt', function () use ($config) {
 });
 
 
-$container->set('volt', function($view, $container) {
+$container->set('volt', function ($view, $container) {
 
     $volt = new Volt($view, $container);
 
     $volt->setOptions([
-        'compiledPath' => function($templatePath) {
+        'compiledPath' => function ($templatePath) {
 
             $dir = ROOT_PATH . '/cache/templates/';
 
-            if(!is_dir($dir) && !mkdir($dir, 0755, true) && !is_dir($dir)){
+            if (!is_dir($dir) && !mkdir($dir, 0755, true) && !is_dir($dir)) {
                 throw new \RuntimeException(sprintf('Directory "%s" was not created', $dir));
             }
 
@@ -68,7 +68,7 @@ $container->set('volt', function($view, $container) {
 });
 
 
-$container->set('view', function() {
+$container->set('view', function () {
     $view = new View();
 
     $view->registerEngines([

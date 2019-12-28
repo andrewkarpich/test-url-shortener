@@ -9,8 +9,7 @@
 namespace Frontend;
 
 
-class Controller extends \Phalcon\Mvc\Controller
-{
+class Controller extends \Phalcon\Mvc\Controller {
 
     public function sendJson($data): bool {
 
@@ -32,8 +31,8 @@ class Controller extends \Phalcon\Mvc\Controller
         $this->response->setStatusCode(200);
 
         $jsonData = [
-            'status'   => 'ok',
-            'success'  => true,
+            'status' => 'ok',
+            'success' => true,
             'response' => $data,
         ];
 
@@ -44,27 +43,27 @@ class Controller extends \Phalcon\Mvc\Controller
 
         $errorsField = [];
 
-        if($message instanceof \Exception){
+        if ($message instanceof \Exception) {
 
-            if($message->getCode()){
+            if ($message->getCode()) {
                 $errorCode = $message->getCode();
             }
 
             $message = $message->getMessage();
 
-        } else if(\is_array($message) && \count($message) > 0 && isset($message[0])){
+        } else if (\is_array($message) && \count($message) > 0 && isset($message[0])) {
 
-            if(\count($message) === 2 && \is_int($message[0])){
+            if (\count($message) === 2 && \is_int($message[0])) {
 
-                [ $errorCode, $message ] = $message;
+                [$errorCode, $message] = $message;
 
             } else {
 
-                foreach($message as $msg){
-                    if($msg instanceof \Phalcon\Validation\MessageInterface){
+                foreach ($message as $msg) {
+                    if ($msg instanceof \Phalcon\Validation\MessageInterface) {
                         $errorsField[] = [
-                            'name'    => $msg->getField(),
-                            'type'    => $msg->getType(),
+                            'name' => $msg->getField(),
+                            'type' => $msg->getType(),
                             'message' => $msg->getMessage(),
                         ];
                     }
@@ -77,12 +76,12 @@ class Controller extends \Phalcon\Mvc\Controller
             'code' => $errorCode,
         ];
 
-        if(\is_array($message) && \count($errorsField) > 0){
+        if (\is_array($message) && \count($errorsField) > 0) {
 
             $errorBlock['message'] = 'Some fields are incorrect';
             $errorBlock['fields'] = $errorsField;
-            if($errorBlock['code'] === 1) $errorBlock['code'] = 412;
-            if($statusCode === 400) $statusCode = 412;
+            if ($errorBlock['code'] === 1) $errorBlock['code'] = 412;
+            if ($statusCode === 400) $statusCode = 412;
 
         } else {
 
@@ -91,9 +90,9 @@ class Controller extends \Phalcon\Mvc\Controller
         }
 
         $jsonData = [
-            'status'  => 'error',
+            'status' => 'error',
             'success' => false,
-            'error'   => $errorBlock,
+            'error' => $errorBlock,
         ];
 
         $this->response->setStatusCode($statusCode);

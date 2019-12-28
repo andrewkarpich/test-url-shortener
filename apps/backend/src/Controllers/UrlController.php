@@ -11,8 +11,7 @@ use Phalcon\Filter;
 use Phalcon\Security\Exception;
 use Phalcon\Validation;
 
-class UrlController extends JsonRpcController
-{
+class UrlController extends JsonRpcController {
 
     /**
      * @param string $longUrl
@@ -21,8 +20,7 @@ class UrlController extends JsonRpcController
      * @throws ArgumentException
      * @throws Exception
      */
-    public function reduceAction(string $longUrl): string
-    {
+    public function reduceAction(string $longUrl): string {
 
         $longUrl = (new Filter)->sanitize($longUrl, ['string', 'trim']);
 
@@ -65,8 +63,7 @@ class UrlController extends JsonRpcController
      * @return string
      * @throws ApplicationException
      */
-    protected function generateCode(int $nestedLevel = 1): ?string
-    {
+    protected function generateCode(int $nestedLevel = 1): ?string {
 
         try {
 

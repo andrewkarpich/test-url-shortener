@@ -5,8 +5,7 @@ namespace Backend\Phalcon;
 
 use Phalcon\Cli\Dispatcher;
 
-class JsonRpcDispatcher extends Dispatcher
-{
+class JsonRpcDispatcher extends Dispatcher {
 
     protected $_handlerSuffix = 'Controller';
 
@@ -17,8 +16,7 @@ class JsonRpcDispatcher extends Dispatcher
      * @param array|null $params
      * @return mixed
      */
-    public function callActionMethod($handler, $actionMethod, array $params = null)
-    {
+    public function callActionMethod($handler, $actionMethod, array $params = null) {
 
         return \call_user_func_array([$handler, $actionMethod], array_merge($params, $this->_options));
 

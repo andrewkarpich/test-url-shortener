@@ -2,9 +2,12 @@
 
 use Phalcon\Crypt;
 use Phalcon\Db\Adapter\Pdo\Postgresql;
+use Phalcon\Http\Response;
 use Phalcon\Mvc\Url;
 
 $container->set('config', $config);
+
+$container->set('response', new Response());
 
 $container->set('url', function () use ($config) {
     $url = new Url();

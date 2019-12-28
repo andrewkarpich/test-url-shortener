@@ -7,18 +7,15 @@ use Datto\JsonRpc\Responses\ErrorResponse;
 use Frontend\Controller;
 use Frontend\Services\BackendClient;
 
-class IndexController extends Controller
-{
+class IndexController extends Controller {
 
-    public function indexAction(): void
-    {
+    public function indexAction(): void {
 
     }
 
-    public function getShortUrlAction(): bool
-    {
+    public function getShortUrlAction(): bool {
 
-        if($this->request->isPost()) {
+        if ($this->request->isPost()) {
 
             $longUrl = $this->request->get('url');
 

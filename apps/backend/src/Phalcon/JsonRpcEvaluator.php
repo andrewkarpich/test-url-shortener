@@ -8,8 +8,7 @@ use Datto\JsonRpc\Exceptions\ArgumentException;
 use Datto\JsonRpc\Exceptions\MethodException;
 use Phalcon\Di\Injectable;
 
-class JsonRpcEvaluator extends Injectable implements Evaluator
-{
+class JsonRpcEvaluator extends Injectable implements Evaluator {
 
 
     /**
@@ -21,8 +20,7 @@ class JsonRpcEvaluator extends Injectable implements Evaluator
      * @throws MethodException
      * @throws \Datto\JsonRpc\Exceptions\Exception
      */
-    public function evaluate($method, $arguments)
-    {
+    public function evaluate($method, $arguments) {
 
         [$task, $action] = explode('_', $method);
 
